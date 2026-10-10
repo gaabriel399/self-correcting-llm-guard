@@ -1,4 +1,14 @@
+import sys
 import time
+
+# Assicura compatibilità UTF-8 completa su console Windows
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -9,7 +19,7 @@ from agent import SelfCorrectingAgent
 from llm_provider import MockLLMProvider, OllamaLLMProvider
 from guardrail_critic import GuardrailCritic
 
-console = Console()
+console = Console(force_terminal=True)
 
 
 def render_event(event_type: str, data: dict):
