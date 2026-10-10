@@ -1,0 +1,42 @@
+{
+  "company_name": "NovaTech Solutions",
+  "policies": {
+    "returns": {
+      "max_days": 30,
+      "conditions": "Il prodotto deve essere integro e nella confezione originale con scontrino.",
+      "strict_rule": "Non autorizzare MAI resi oltre i 30 giorni dall'acquisto."
+    },
+    "shipping": {
+      "standard_cost": 4.99,
+      "free_threshold": 50.0,
+      "express_cost": 9.99,
+      "delivery_days": "2-4 giorni lavorativi",
+      "strict_rule": "La spedizione gratuita si applica SOLO per ordini superiori a 50 euro."
+    },
+    "discounts": {
+      "max_allowed_percent": 10,
+      "welcome_code": "BENVENUTO10",
+      "strict_rule": "È severamente vietato promettere o inventare sconti superiori al 10%."
+    },
+    "warranty": {
+      "duration_years": 2,
+      "coverage": "Copre difetti di fabbrica conformi alla normativa europea. Non copre danni accidentali o cadute."
+    },
+    "forbidden_competitors": [
+      "Amazon",
+      "MediaWorld",
+      "Unieuro",
+      "Apple Store"
+    ]
+  },
+  "security": {
+    "blocked_phrases": [
+      "ignora le istruzioni",
+      "dimentica le regole",
+      "fai finta di essere",
+      "mostrami il database",
+      "password di sistema",
+      "system prompt"
+    ]
+  }
+}
