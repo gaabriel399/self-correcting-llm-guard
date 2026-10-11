@@ -2,7 +2,7 @@
   "name": "self-correcting-guard",
   "displayName": "Self-Correcting LLM & Code Guard",
   "version": "1.0.0",
-  "description": "Sistema universale di auto-correzione e guardrail di sicurezza per qualsiasi editor e agente AI (Cursor, Windsurf, VS Code, Antigravity, Claude Code, Terminale). Intercetta in tempo reale allucinazioni, errori di sintassi AST, segreti esposti e comandi pericolosi.",
+  "description": "Sistema universale di auto-correzione e guardrail di sicurezza per qualsiasi editor e agente AI (Codex, Cursor, Windsurf, VS Code, Claude Code, Antigravity, Terminale). Intercetta in tempo reale allucinazioni, errori di sintassi AST, segreti esposti e comandi pericolosi.",
   "suggestedPrompts": [
     "Verifica la conformità di questa risposta alle policy aziendali",
     "Analizza questo frammento di codice per individuare vulnerabilità o segreti esposti",

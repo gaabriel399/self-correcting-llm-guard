@@ -5,13 +5,13 @@
 # 🛡️ Self-Correcting LLM Guard & Evals
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Multi--Editor](https://img.shields.io/badge/Compatibility-Cursor%20%7C%20Windsurf%20%7C%20VS%20Code%20%7C%20Claude%20%7C%20Antigravity-brightgreen.svg)]()
+[![Multi--Editor](https://img.shields.io/badge/Compatibility-Codex%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20VS%20Code%20%7C%20Claude%20%7C%20Antigravity-brightgreen.svg)]()
 [![Pattern](https://img.shields.io/badge/Architecture-Reflection%20Pattern-orange.svg)]()
 [![Evals](https://img.shields.io/badge/Evals-Passing%20(100%25)-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)]()
 
 > **Sistema Universale di Auto-Correzione (Reflection Pattern) e Guardrail di Sicurezza per qualsiasi Editor, IDE e AI Agent.**
-> Funziona nativamente con **Cursor**, **Windsurf**, **VS Code** (Copilot/Cline/Roo), **Claude Code**, **Antigravity**, terminale CLI e pipeline CI/CD. Intercetta in tempo reale allucinazioni su policy aziendali, errori di sintassi AST, segreti hardcoded e operazioni a rischio prima della consegna all'utente.
+> Funziona nativamente con **OpenAI Codex / Codex CLI**, **Cursor**, **Windsurf**, **VS Code** (Copilot/Cline/Roo), **Claude Code**, **Antigravity**, terminale CLI e pipeline CI/CD. Intercetta in tempo reale allucinazioni su policy aziendali, errori di sintassi AST, segreti hardcoded e operazioni a rischio prima della consegna all'utente.
 
 ---
 
@@ -77,6 +77,7 @@ Il progetto è architettato per funzionare con **qualsiasi editor e assistente A
 
 | Ambiente / Editor | Modalità di Integrazione | File di Configurazione |
 | :--- | :--- | :--- |
+| **OpenAI Codex / Codex CLI** | Direttive prompt, wrapper Python e validazione output | [`CODEX.md`](CODEX.md), [`rules/AGENTS.md`](rules/AGENTS.md) |
 | **Cursor** | Regole di progetto per l'AI Agent | [`.cursorrules`](.cursorrules) |
 | **Windsurf** | Regole di contesto per Cascade | [`.windsurfrules`](.windsurfrules) |
 | **Claude Code** | Istruzioni per Claude CLI & Agent | [`CLAUDE.md`](CLAUDE.md) |
@@ -213,6 +214,7 @@ agent = SelfCorrectingAgent(
 ├── .cursorrules             # Regole native per Cursor IDE
 ├── .windsurfrules           # Regole native per Windsurf IDE
 ├── CLAUDE.md                # Linee guida per Claude Code CLI
+├── CODEX.md                 # Direttive e wrapper per OpenAI Codex / Codex CLI
 ├── .agents/                 # Configurazione per Antigravity e Agentic IDEs
 │   ├── rules/AGENTS.md      # Regole sempre attive
 │   ├── hooks.json           # Lifecycle Hooks (PreToolUse e Stop)

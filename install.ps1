@@ -32,6 +32,7 @@ $ItemsToCopy = @(
     ".cursorrules",
     ".windsurfrules",
     "CLAUDE.md",
+    "CODEX.md",
     "scripts",
     "code_guard.py",
     "guardrail_critic.py",

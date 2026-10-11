@@ -5,7 +5,7 @@ description: Auto-correcting LLM guardrail and code safety engine. Evaluates cod
 
 # 🛡️ Self-Correcting Guard Skill
 
-Questo modulo fornisce le istruzioni e gli strumenti per validare e auto-correggere le risposte e il codice generati da qualsiasi AI Agent o editor (Cursor, Windsurf, VS Code, Claude Code, Antigravity, Terminale).
+Questo modulo fornisce le istruzioni e gli strumenti per validare e auto-correggere le risposte e il codice generati da qualsiasi AI Agent o editor (Codex, Cursor, Windsurf, VS Code, Claude Code, Antigravity, Terminale).
 
 ## Obiettivi della Skill
 
