@@ -15,7 +15,20 @@
 
 ---
 
+## ⚡ Installazione Rapida in 1 Secondo (1-Click Install)
+
+Apri PowerShell all'interno della cartella del tuo progetto e incolla questo singolo comando:
+
+```powershell
+irm https://raw.githubusercontent.com/gaabriel399/self-correcting-llm-guard/main/install.ps1 | iex
+```
+
+> 💡 **Zero Configurazione**: Lo script scarica, estrae e configura istantaneamente le regole e gli hook per **Codex**, **Cursor** (`.cursorrules`), **Windsurf** (`.windsurfrules`), **Claude Code** (`CLAUDE.md`), **VS Code** e **Antigravity** (`.agents/`).
+
+---
+
 ## 📌 Perché questo progetto?
+
 
 Nei moderni ambienti di sviluppo assistiti dall'AI, i modelli linguistici possono commettere errori critici:
 - **Allucinazioni & Policy Breach**: Inventare condizioni commerciali fuori policy (sconti non consentiti, tempistiche di reso errate).
@@ -176,6 +189,24 @@ L'agente aggiorna dinamicamente `knowledge_base.json` e notifica l'avvenuto salv
 
 ---
 
+## 🔒 Privacy & Sviluppo Personale (Come non committare i file su Git)
+
+Se vuoi utilizzare la protezione del Guardrail sui tuoi repository personali o di lavoro senza caricare i file su GitHub e senza condividerli con i colleghi del team:
+
+Aggiungi semplicemente i file della skill al file locale `.git/info/exclude` (che è il gitignore segreto di Git e non viene mai caricato su GitHub):
+
+```powershell
+Add-Content -Path .git/info/exclude -Value "`ncode_guard.py`nguardrail_critic.py`nknowledge_base.json`nmodels.py`nscripts/`n.agents/`n.cursorrules`n.windsurfrules`nCLAUDE.md`nCODEX.md"
+```
+
+In questo modo:
+1. **La protezione rimane attiva al 100%** sul tuo editor locale 24/7.
+2. **Git ignora completamente i file**: non compariranno mai nei tuoi commit né nella cronologia di Git.
+3. **Zero tracce su GitHub**: nessun altro membro del team vedrà o riceverà la skill.
+
+
+---
+
 ## 🔌 Connessione a Modelli Locali o Cloud
 
 Il sistema supporta provider modulari e intercambiabili in [`llm_provider.py`](llm_provider.py):
@@ -210,7 +241,9 @@ agent = SelfCorrectingAgent(
 ├── assets/                  # Grafica, banner e diagrammi architetturali
 │   ├── banner.png           # Banner ufficiale del repository
 │   ├── architecture.png     # Diagramma di flusso e reflection loop
-│   └── demo.png             # Mockup visuale dell'auto-correzione
+│   ├── demo.png             # Mockup visuale dell'auto-correzione
+│   └── portfolio_cover.png  # Cover visuale ad alta risoluzione per presentazioni
+
 ├── .cursorrules             # Regole native per Cursor IDE
 ├── .windsurfrules           # Regole native per Windsurf IDE
 ├── CLAUDE.md                # Linee guida per Claude Code CLI
