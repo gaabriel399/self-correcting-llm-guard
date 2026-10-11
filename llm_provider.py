@@ -88,3 +88,51 @@ class OllamaLLMProvider(LLMProvider):
                 return res.json().get("response", "").strip()
         except Exception as e:
             raise RuntimeError(f"Errore nella comunicazione con Ollama ({self.base_url}): {e}")
+
+
+class OpenAILLMProvider(LLMProvider):
+    """
+    Provider per OpenAI Codex / GPT-4o / GPT-3.5.
+    Utilizza httpx per effettuare chiamate all'endpoint Chat Completions di OpenAI.
+    Carica automaticamente OPENAI_API_KEY dall'ambiente.
+    """
+
+    def __init__(self, api_key: Optional[str] = None, model_name: str = "gpt-4o"):
+        import os
+        self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
+        self.model_name = model_name
+        self.api_url = "https://api.openai.com/v1/chat/completions"
+
+    def generate(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+        if not self.api_key:
+            raise ValueError(
+                "Chiave API OpenAI non trovata. Imposta la variabile d'ambiente OPENAI_API_KEY "
+                "o passala al costruttore: OpenAILLMProvider(api_key='...')"
+            )
+
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": self.model_name,
+            "messages": messages,
+            "temperature": 0.2
+        }
+
+        try:
+            with httpx.Client(timeout=45.0) as client:
+                res = client.post(self.api_url, json=payload, headers=headers)
+                res.raise_for_status()
+                data = res.json()
+                return data["choices"][0]["message"]["content"].strip()
+        except httpx.HTTPStatusError as e:
+            raise RuntimeError(f"Errore HTTP OpenAI ({e.response.status_code}): {e.response.text}")
+        except Exception as e:
+            raise RuntimeError(f"Errore di connessione a OpenAI Codex: {e}")
+

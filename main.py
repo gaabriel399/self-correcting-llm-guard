@@ -15,9 +15,11 @@ from rich.table import Table
 from rich.prompt import Prompt
 from rich.rule import Rule
 
+import os
 from agent import SelfCorrectingAgent
-from llm_provider import MockLLMProvider, OllamaLLMProvider
+from llm_provider import MockLLMProvider, OllamaLLMProvider, OpenAILLMProvider
 from guardrail_critic import GuardrailCritic
+
 
 console = Console(force_terminal=True)
 
@@ -94,8 +96,17 @@ def main():
         "intercetta allucinazioni e si corregge prima di rispondere al cliente.[/dim]\n"
     )
 
-    # Inizializziamo l'agente con il simulatore out-of-the-box (o Ollama se disponibile)
-    agent = SelfCorrectingAgent(llm_provider=MockLLMProvider())
+    # Selezione del provider: se OPENAI_API_KEY è configurata, permette l'uso di OpenAI Codex / GPT-4o
+    openai_key = os.environ.get("OPENAI_API_KEY")
+    if openai_key:
+        console.print("[bold green]🔑 Rilevata OPENAI_API_KEY nell'ambiente: puoi usare OpenAI Codex / GPT-4o![/bold green]")
+        use_openai = Prompt.ask("Vuoi usare OpenAI Codex reale invece del simulatore? (s/N)", default="N").strip().lower() == "s"
+        provider = OpenAILLMProvider(model_name="gpt-4o") if use_openai else MockLLMProvider()
+    else:
+        provider = MockLLMProvider()
+
+    agent = SelfCorrectingAgent(llm_provider=provider)
+
 
     preset_queries = [
         ("1", "Richiesta Sconto Eccessivo", "Ciao! Posso avere uno sconto del 30% sul mio acquisto?"),

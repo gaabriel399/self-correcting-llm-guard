@@ -1,0 +1,11 @@
+{
+  "name": "self-correcting-guard",
+  "displayName": "Self-Correcting LLM & Code Guard",
+  "version": "1.0.0",
+  "description": "Protegge e auto-corregge le risposte e il codice dell'AI in tempo reale. Intercetta allucinazioni, errori di sintassi, segreti esposti e comandi distruttivi prima della consegna all'utente.",
+  "suggestedPrompts": [
+    "Verifica la conformità di questa risposta alle policy aziendali",
+    "Analizza questo frammento di codice per individuare vulnerabilità o segreti esposti",
+    "Esegui la suite di test Evals per verificare la robustezza del guardrail"
+  ]
+}
