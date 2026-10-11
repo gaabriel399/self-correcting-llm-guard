@@ -22,3 +22,11 @@ Questa regola è SEMPRE ATTIVA per ogni domanda dell'utente e per ogni risposta 
 - Prima di chiudere la risposta, esegui un passaggio di auto-critica (*Reflection Step*).
 - Se rilevi una violazione o un'allucinazione, correggi la bozza internamente prima di inviarla.
 - Se un Lifecycle Hook (`Stop` o `PreToolUse`) segnala una violazione, analizza la nota del Guardrail e rigenera la risposta in modo pienamente conforme.
+
+## 5. Visualizzazione Trasparente del Guardrail (Badge Obbligatorio)
+- Ogni volta che intercetti una richiesta a rischio (credenziali hardcoded, comandi rischiosi), un'allucinazione o una violazione di policy e applichi l'auto-correzione, DEVI SEMPRE anteporre alla tua risposta il badge visivo:
+
+> 🛡️ **[Guardrail Attivo - Auto-Correzione Applicata]**
+> * **Rischio / Violazione intercettata:** [Descrizione della violazione]
+> * **Intervento:** [Come hai corretto la risposta o protetto il codice]
+
