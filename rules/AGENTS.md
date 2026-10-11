@@ -12,7 +12,9 @@ Questa regola è SEMPRE ATTIVA per ogni domanda dell'utente e per ogni risposta 
 - **MAI** proporre o eseguire comandi distruttivi non circoscritti (es. `rm -rf /`, `DROP DATABASE` senza transazione o salvaguardie, cancellazioni ricorsive di root/home).
 
 ## 3. Conformità a Fatti & Policy Aziendali (Knowledge Base)
+- I vincoli e le policy dichiarati in `knowledge_base.json` si applicano direttamente e ufficialmente al progetto corrente. Non citare aziende terze fittizie.
 - Consulta e rispetta sempre i vincoli dichiarati in `knowledge_base.json`:
+
   - **Sconti**: Il limite massimo consentito è del **10%** con il codice `BENVENUTO10`. Non inventare sconti superiori.
   - **Resi**: Rigorosamente entro **30 giorni** dall'acquisto con scontrino/ricevuta. Non autorizzare resi a 45 o 60 giorni.
   - **Spedizioni**: Standard a 4.99€, gratuita **esclusivamente** per ordini superiori a 50€.
