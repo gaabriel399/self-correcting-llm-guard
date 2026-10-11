@@ -77,14 +77,30 @@ class GuardrailCritic:
 
         # 1. Controllo Sconti
         max_discount = self.policies.get("discounts", {}).get("max_allowed_percent", 10)
-        # Cerca numeri seguiti da %
-        percent_matches = re.findall(r"(\d+)\s*%", draft)
-        for pct_str in percent_matches:
-            pct_val = int(pct_str)
-            if pct_val > max_discount:
-                violations.append(f"Sconto non autorizzato: promesso sconto del {pct_val}% (il massimo consentito è {max_discount}%)")
-                critique_notes.append(f"Hai promesso uno sconto del {pct_val}%, ma la policy aziendale vieta sconti oltre il {max_discount}%.")
-                fixes.append(f"Offri solo il codice ufficiale {self.policies['discounts']['welcome_code']} per uno sconto del {max_discount}%.")
+        has_discount_context = any(
+            k in draft_lower or (user_query and k in user_query.lower())
+            for k in ("sconto", "sconti", "discount", "promozione", "promo", "coupon", "ribasso", "saldi")
+        )
+        if has_discount_context:
+            discount_patterns = [
+                r"(?:sconto|ribasso|offerta|coupon|promo|promozione|taglio|meno|risparmi[a-z]*)\D{0,25}(\d+)\s*%",
+                r"(\d+)\s*%\s*(?:di\s+)?(?:sconto|ribasso|promozione|meno|in meno|off)",
+            ]
+            found_pcts = []
+            for pat in discount_patterns:
+                for match in re.finditer(pat, draft_lower):
+                    found_pcts.append(int(match.group(1)))
+
+            # Se la query chiedeva uno sconto/promo e nessuna regex specifica ha fatto match, controlla le percentuali generiche
+            if not found_pcts and any(k in (user_query or "").lower() for k in ("sconto", "discount", "promo")):
+                for pct_str in re.findall(r"(\d+)\s*%", draft):
+                    found_pcts.append(int(pct_str))
+
+            for pct_val in found_pcts:
+                if pct_val > max_discount:
+                    violations.append(f"Sconto non autorizzato: promesso sconto del {pct_val}% (il massimo consentito è {max_discount}%)")
+                    critique_notes.append(f"Hai promesso uno sconto del {pct_val}%, ma la policy aziendale vieta sconti oltre il {max_discount}%.")
+                    fixes.append(f"Offri solo il codice ufficiale {self.policies['discounts']['welcome_code']} per uno sconto del {max_discount}%.")
 
         # 2. Controllo Politica di Reso
         max_return_days = self.policies.get("returns", {}).get("max_days", 30)

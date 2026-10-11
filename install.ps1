@@ -29,6 +29,9 @@ if ($LocalSource -and (Test-Path (Join-Path $LocalSource "code_guard.py"))) {
 # Elementi da installare nel progetto di destinazione
 $ItemsToCopy = @(
     ".agents",
+    ".cursorrules",
+    ".windsurfrules",
+    "CLAUDE.md",
     "scripts",
     "code_guard.py",
     "guardrail_critic.py",
@@ -51,4 +54,4 @@ if (Test-Path $ZipPath) { Remove-Item -Path $ZipPath -Force }
 if (Test-Path $ExtractPath) { Remove-Item -Path $ExtractPath -Recurse -Force }
 
 Write-Host "✅ Installazione completata con successo in: $(Resolve-Path $TargetDir)" -ForegroundColor Green
-Write-Host "Ora Codex e l'AI applicheranno i controlli di sicurezza su ogni domanda e risposta di codice!" -ForegroundColor White
+Write-Host "Ora Cursor, Windsurf, VS Code, Claude Code, Antigravity e qualsiasi AI applicheranno i controlli di sicurezza!" -ForegroundColor White
