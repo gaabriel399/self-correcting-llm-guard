@@ -18,6 +18,37 @@ class GuardrailCritic:
             
         self.policies = self.kb.get("policies", {})
         self.security = self.kb.get("security", {})
+        self.company_name = self.detect_company_name()
+
+    def detect_company_name(self) -> str:
+        """
+        Rileva dinamicamente il nome dell'azienda o del progetto attuale:
+        1. Cerca package.json (Next.js, Node, React)
+        2. Fallback sul nome della directory del progetto
+        3. Fallback sul company_name della knowledge base
+        """
+        for candidate_dir in (Path.cwd(), Path(__file__).resolve().parent, Path(__file__).resolve().parent.parent):
+            pkg = candidate_dir / "package.json"
+            if pkg.exists():
+                try:
+                    with open(pkg, "r", encoding="utf-8") as f:
+                        name = json.load(f).get("name", "").strip()
+                        if name:
+                            return name.capitalize()
+                except Exception:
+                    pass
+
+        # Usa il nome della cartella corrente se significativo
+        cwd_name = Path.cwd().name
+        if cwd_name and cwd_name.lower() not in ("src", "root", "workspace", "scratch", "temp"):
+            return cwd_name.capitalize()
+
+        kb_name = self.kb.get("company_name", "")
+        if kb_name and kb_name not in ("Progetto Corrente", "NovaTech Solutions"):
+            return kb_name
+
+        return "la nostra azienda"
+
 
     def check_input_security(self, user_query: str) -> tuple[bool, str]:
         """
@@ -80,7 +111,8 @@ class GuardrailCritic:
             if comp.lower() in draft_lower:
                 violations.append(f"Menzione di competitor non consentito: '{comp}'")
                 critique_notes.append(f"Hai citato il concorrente '{comp}'. La policy vieta di fare pubblicità o confronti con aziende terze.")
-                fixes.append("Rimuovi ogni menzione del concorrente e focalizzati unicamente sui punti di forza di NovaTech Solutions.")
+                fixes.append(f"Rimuovi ogni menzione del concorrente e focalizzati unicamente sui punti di forza di {self.company_name}.")
+
 
         is_valid = len(violations) == 0
 

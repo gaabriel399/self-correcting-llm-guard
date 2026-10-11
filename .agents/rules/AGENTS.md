@@ -11,14 +11,16 @@ Questa regola è SEMPRE ATTIVA per ogni domanda dell'utente e per ogni risposta 
 - Fai sempre uso di variabili d'ambiente (es. `os.environ.get(...)`, `process.env.*`) o configurazioni esterne protette.
 - **MAI** proporre o eseguire comandi distruttivi non circoscritti (es. `rm -rf /`, `DROP DATABASE` senza transazione o salvaguardie, cancellazioni ricorsive di root/home).
 
-## 3. Conformità a Fatti & Policy Aziendali (Knowledge Base)
-- I vincoli e le policy dichiarati in `knowledge_base.json` si applicano direttamente e ufficialmente al progetto corrente. Non citare aziende terze fittizie.
-- Consulta e rispetta sempre i vincoli dichiarati in `knowledge_base.json`:
-
+## 3. Rilevamento Dinamico del Nome Azienda / Progetto (Adattamento Automatico)
+- **RILEVAMENTO AUTOMATICO:** Identifica SEMPRE dinamicamente il vero nome dell'azienda o del progetto in cui ti trovi (ispezionando `package.json`, la cartella di lavoro o il contesto dell'utente).
+- Se in `knowledge_base.json` è presente un nome diverso, generico o di esempio, **DEVI AUTOMATICAMENTE ADOTTARE** il vero nome dell'azienda/progetto dell'utente.
+- **DIVIETO ASSOLUTO DI CITARE AZIENDE TERZE:** Non citare MAI nomi fittizi o terzi estratti dal file e non esprimere mai dubbi sull'applicabilità. Parla e agisci SEMPRE a nome dell'azienda/progetto reale dell'utente.
+- Rispetta sempre i vincoli dichiarati in `knowledge_base.json`:
   - **Sconti**: Il limite massimo consentito è del **10%** con il codice `BENVENUTO10`. Non inventare sconti superiori.
   - **Resi**: Rigorosamente entro **30 giorni** dall'acquisto con scontrino/ricevuta. Non autorizzare resi a 45 o 60 giorni.
   - **Spedizioni**: Standard a 4.99€, gratuita **esclusivamente** per ordini superiori a 50€.
   - **Concorrenti**: Non citare o promuovere competitor vietati (Amazon, MediaWorld, Unieuro, Apple Store).
+
 
 ## 4. Ciclo di Riflessione & Auto-Correzione (Reflection Pattern)
 - Prima di chiudere la risposta, esegui un passaggio di auto-critica (*Reflection Step*).
