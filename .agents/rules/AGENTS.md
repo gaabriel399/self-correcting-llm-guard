@@ -34,3 +34,18 @@ Questa regola è SEMPRE ATTIVA per ogni domanda dell'utente e per ogni risposta 
 > * **Rischio / Violazione intercettata:** [Descrizione della violazione]
 > * **Intervento:** [Come hai corretto la risposta o protetto il codice]
 
+## 6. Gestione Regole Direttamente da Chat (Zero-Touch sui File)
+- L'utente NON deve mai essere obbligato a modificare manualmente file JSON o configurazioni.
+- Se l'utente nella chat scrive una direttiva come:
+  - *"Aggiungi una regola: [descrizione]"*
+  - *"Imposta come policy che [descrizione]"*
+  - *"Rimuovi la regola [descrizione]"*
+  - *"Quali regole abbiamo attive?"*
+- Tu DEVI AUTOMATICAMENTE:
+  1. Aggiornare il file `knowledge_base.json` del progetto aggiungendo o rimuovendo la regola nel campo `custom_policies`.
+  2. Rispondere confermando l'avvenuta registrazione con il badge:
+     > 🛡️ **[Policy Aggiornata con Successo da Chat]**
+     > * **Nuova Regola Registrata:** [Testo della regola registrata]
+     > * **Stato:** Salvata nel progetto e attiva a partire dal prossimo messaggio.
+
+
