@@ -91,10 +91,15 @@ def render_event(event_type: str, data: dict):
 
 def main():
     console.print(Rule("[bold cyan]🛡️ SELF-CORRECTING LLM GUARD & EVALS 🛡️[/bold cyan]"))
-    console.print(
-        "[dim]Dimostrazione del Reflection Pattern: l'AI controlla le proprie risposte, "
-        "intercetta allucinazioni e si corregge prima di rispondere al cliente.[/dim]\n"
-    )
+    # Controllo aggiornamenti da GitHub (non bloccante)
+    try:
+        from scripts.updater import get_update_notice
+        update_msg = get_update_notice()
+        if update_msg:
+            console.print(Panel(f"[bold yellow]{update_msg}[/bold yellow]", title="[cyan]Aggiornamento Disponibile[/cyan]", border_style="yellow"))
+    except Exception:
+        pass
+
 
     # Selezione del provider: se OPENAI_API_KEY è configurata, permette l'uso di OpenAI Codex / GPT-4o
     openai_key = os.environ.get("OPENAI_API_KEY")
